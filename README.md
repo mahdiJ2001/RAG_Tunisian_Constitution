@@ -13,6 +13,12 @@ You can ask questions about the constitution, and the system retrieves relevant 
 
 ---
 
+## Screenshot
+
+![RAG Interface](Rag.png)
+
+---
+
 ## Usage
 
 1. Place your PDF in `data/uploads/`  
