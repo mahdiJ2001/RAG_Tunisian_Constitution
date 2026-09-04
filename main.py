@@ -33,11 +33,11 @@ CHROMA_PATH = "./chroma_db"
 
 loader = PyPDFLoader(PDF_PATH)
 docs = loader.load()
-print(f"✅ PDF Loaded: {len(docs)} pages.")
+print(f"PDF Loaded: {len(docs)} pages.")
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 doc_splits = text_splitter.split_documents(docs)
-print(f"✅ Created {len(doc_splits)} chunks.")
+print(f"Created {len(doc_splits)} chunks.")
 
 # Initialize Chroma
 vectorstore = Chroma(
@@ -51,16 +51,16 @@ current_count = len(vectorstore.get()['ids'])
 print(f"DEBUG: Current database record count: {current_count}")
 
 if current_count == 0:
-    print("⚠️ Database is empty! Ingesting chunks now...")
+    print("Database is empty! Ingesting chunks now...")
     # Add documents in batches
     batch_size = 20
     for i in range(0, len(doc_splits), batch_size):
         batch = doc_splits[i : i + batch_size]
         vectorstore.add_documents(batch)
         print(f"  > Progress: Added {i + len(batch)}/{len(doc_splits)} chunks")
-    print("✅ Ingestion complete.")
+    print("Ingestion complete.")
 else:
-    print(f"✅ Using existing database with {current_count} records.")
+    print(f"Using existing database with {current_count} records.")
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 7})
 
@@ -75,7 +75,7 @@ async def ask_constitution(request: QuestionRequest):
     
     # Check if we actually found anything
     if not retrieved_docs:
-        print("DEBUG: ❌ NO DOCUMENTS RETRIEVED!")
+        print("DEBUG: NO DOCUMENTS RETRIEVED!")
         return {
             "question": request.question,
             "answer": "I'm sorry, I couldn't find any relevant sections in the constitution.",
