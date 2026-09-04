@@ -27,7 +27,7 @@ llm = ChatBedrock(
     model_kwargs={"temperature": 0, "max_tokens": 2048}
 )
 
-# --- 3. DOCUMENT PROCESSING (Corrected) ---
+# --- 3. DOCUMENT PROCESSING ---
 PDF_PATH = "data/uploads/tunisian_constitution.pdf"
 CHROMA_PATH = "./chroma_db"
 
